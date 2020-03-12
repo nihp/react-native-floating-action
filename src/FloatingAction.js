@@ -187,7 +187,7 @@ class FloatingAction extends Component {
         return icon;
       }
       return (
-        <Image style={{ width: iconWidth, height: iconHeight }} source={icon} />
+        <Image style={{ width: iconWidth, height: iconHeight, margin:"30%" }} source={icon} />
       );
     }
 
@@ -198,7 +198,7 @@ class FloatingAction extends Component {
 
       return (
         <Image
-          style={{ width: iconWidth, height: iconHeight }}
+          style={{ width: iconWidth, height: iconHeight, marginBottom:30 }}
           source={floatingIcon}
         />
       );
@@ -405,7 +405,7 @@ class FloatingAction extends Component {
       bottom: this.mainBottomAnimation // I need to imporove this to run on native thread and not on JS thread
     };
 
-    if (["left", "right"].indexOf(position) > -1) {
+    if (["left", "right", "center"].indexOf(position) > -1) {
       propStyles[position] = this.distanceToHorizontalEdge;
     }
 
@@ -420,7 +420,7 @@ class FloatingAction extends Component {
         style={[
           styles.buttonContainer,
           sizeStyle,
-          styles[`${position}Button`],
+          styles[`${'center'}Button`],
           propStyles,
           animatedVisibleView,
           this.getShadow()
@@ -609,7 +609,7 @@ FloatingAction.defaultProps = {
   visible: true,
   color: "#1253bc",
   overlayColor: "rgba(68, 68, 68, 0.6)",
-  position: "right",
+  position: "center",
   distanceToEdge: 30,
   openOnMount: false,
   showBackground: true,
@@ -617,9 +617,10 @@ FloatingAction.defaultProps = {
   iconHeight: 15,
   iconWidth: 15,
   iconColor: '#fff',
-  mainVerticalDistance: 0,
+  mainVerticalDistance: 100,
   animated: true,
-  shadow: {}
+  shadow: {},
+  width:"100%"
 };
 
 const styles = StyleSheet.create({
@@ -663,12 +664,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     elevation: 5,
+    //bottom:30,
     position: "absolute"
   },
   button: {
     zIndex: 3,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    borderWidth:1.5,
+    borderColor:'white'
   },
   rightButton: {},
   leftButton: {},
