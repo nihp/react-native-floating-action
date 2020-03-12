@@ -66,10 +66,11 @@ class FloatingActionItem extends Component {
         <View
           key="text"
           style={[
-            styles.textContainer,
-            styles[`${position}TextContainer`],
+
+            styles[`$TextContainer`],
             {
               backgroundColor: textBackground,
+                marginLeft:-100,
               elevation: textElevation || elevation,
               shadowOffset: {
                 height: textElevation || elevation
@@ -120,7 +121,7 @@ class FloatingActionItem extends Component {
     return (
       <View
         key="button"
-        style={[styles.button, propStyles, shadow]}
+        style={[propStyles, shadow]}
       >
         {React.isValidElement(icon) ? (
           icon
@@ -168,6 +169,15 @@ class FloatingActionItem extends Component {
       }
       distanceToEdgeActionContainer.paddingLeft = this.distanceToHorizontalEdge + margin;
     } else if (position === "right") {
+      if (render) {
+        components.push(render({ key: name }));
+      } else {
+        components.push(this.renderText());
+        components.push(this.renderButton());
+      }
+      distanceToEdgeActionContainer.paddingRight = this.distanceToHorizontalEdge + margin;
+    }
+    else if (position === "center") {
       if (render) {
         components.push(render({ key: name }));
       } else {
@@ -270,7 +280,10 @@ const styles = StyleSheet.create({
   container: {
     elevation: 0,
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "row",
+    alignItems:'center',
+    marginLeft:3
+    //backgroundColor:'red'
   },
   actionContainer: {
     elevation: 0,
